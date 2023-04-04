@@ -4,8 +4,7 @@
 	String sessionId = (String) session.getAttribute("sessionId");
 %>
 
-<link rel="stylesheet" href="./resources/css/bootstrap.min.css" />
-
+<link rel="stylesheet" href="/ledger/resources/css/bootstrap.min.css" />
 
 <nav class="navbar navbar-expand navbar-dark" style="background-color: #9933FF;">
   <div class="container">
@@ -19,13 +18,20 @@
 		
 		<c:otherwise>
 		<div class="navbar-header">
-		<a class="navbar-brand" href="<c:url value="/note/mynote.jsp"/>">MyNote </a>
+		<a class="navbar-brand" href="<c:url value="/note/list.jsp"/>">MyNote </a>
 		</div>
-		<ul class="navbar-nav ml-auto">
+		<ul class="navbar-nav nav-right">
 			<li><a class="navbar-item" style="padding-right: 7px; color: white">[<%=sessionId%>]</a></li>
+<!-- 				<li class="dropdown"> -->
+<%-- 					<a class="dropdown-toggle" href="#" style="color: white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">[<%=sessionId%>]<span class="caret"></span></a> --%>
+<!-- 						<ul class="dropdown-menu"> -->
+<%-- 							<li><a class="dropdown-item" href="<c:url value="/member/updateMember.jsp"/>"> MyPage </a></li> --%>
+<!-- 							 <li class="dropdown-divider"></li> -->
+<%-- 							<li><a class="dropdown-item" href="<c:url value="/member/logoutMember.jsp"/>"> LogOut </a></li> --%>
 			<li><a class="navbar-item" style="padding-right: 10px; color: white" href="<c:url value="/member/logoutMember.jsp"/>">LogOut </a></li>
 			<li><a class="navbar-item" style="padding-right: 7px; color: white" href="<c:url value="/member/updateMember.jsp"/>">MyPage </a></li>			
 		</ul>
+<!-- 		</li></ul> -->
 		</c:otherwise>
 
 		</c:choose>	
