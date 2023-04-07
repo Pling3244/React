@@ -81,7 +81,7 @@
 			<div class="form-group  row">
 				<label class="col-sm-2">상세 내역</label>
 				<div class="col-sm-3">
-					<input name="discription" type="text" class="form-control" placeholder="discription" >
+					<input name="description" type="text" class="form-control" placeholder="description" >
 				</div>
 			</div>
 		

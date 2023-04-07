@@ -7,7 +7,6 @@
 	String sessionId = (String) session.getAttribute("sessionId");
 %>
 
-
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -25,24 +24,27 @@ String description = request.getParameter("description");
 // 	java.sql.Timestamp timestamp = new java.sql.Timestamp(currentDatetime.getTime());
 %>
 
-<sql:setDataSource var="dataSource"
-	url="jdbc:oracle:thin:@localhost:1521:xe"
-	driver="oracle.jdbc.driver.OracleDriver" user="ledger" password="oracle" />
+<%@ include file="dbconn.jsp"%>
+<%
+	String num = request.getParameter("num");	
 
-<sql:update dataSource="${dataSource}" var="resultSet">
-   INSERT INTO INOUT VALUES (?, ?, ?, ?, ?, ?, num_seq.nextval, sysdate)
-   <sql:param value="<%=time%>" />
-	<sql:param value="<%=inout%>" />
-	<sql:param value="<%=cashcard%>" />
-	<sql:param value="<%=money%>" />
-	<sql:param value="<%=description%>" />
-	<sql:param value="<%=sessionId%>" />
-<%-- 	<sql:param value="<%=timestamp%>" /> --%>
-</sql:update>
+	String sql = "select * from INOUT";
+	pstmt = conn.prepareStatement(sql);
+	rs = pstmt.executeQuery();
 
-<c:if test="${resultSet>=1}">
+	
+	if(rs.next()) {
+		sql = "UPDATE INOUT SET DAY='"+time+"', IN_OR_OUT='"+inout+"', CASHCARD='"+cashcard+"', MONEY='"+money+"', DESCRIPTION='"+description+"', UPDATEDATE=sysdate WHERE NUM = ?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, num);
+		pstmt.executeUpdate();
+	}
+	if (rs != null)
+		rs.close();
+	if (pstmt != null)
+		pstmt.close();
+	if (conn != null)
+		conn.close();
+	%>
+
 <script>location.href = "list.jsp"; </script>
-<!-- 	response.sendRedirect("/ledger/note/list.jsp"); -->
-<%-- 	<c:redirect url="resultMember.jsp?msg=1" /> --%>
-</c:if>
-

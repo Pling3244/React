@@ -131,8 +131,8 @@
 			</div>
 			<div class="form-group  row">
 				<div class="col-sm-offset-2 col-sm-10 ">
-					<input type="submit" class="btn btn-primary" value="회원수정 "> 
-					<a href="deleteMember.jsp" class="btn btn-primary">회원탈퇴</a>
+					<input type="submit" class="btn btn-dark btn-xl" style="background-color: #9933FF;" value="회원수정 "> 
+					<a href="deleteMember.jsp" class="btn btn-danger">회원탈퇴</a>
 				</div>
 			</div>
 		</form>	
