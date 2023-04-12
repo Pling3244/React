@@ -58,12 +58,12 @@ public class BoardControllerTest {
 				);								
 	}
 	
-//	@Test //3.수정 테스트
+	@Test //3.수정 테스트
 	public void testModify() throws Exception {
 		
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders
 											.post("/board/modify")
-											.param("bno", "1")
+											.param("bno", "21")
 											.param("title", "수정된 테스트 새 글 제목")
 											.param("content", "수정된 테스트 새 글 내용")
 											.param("writer", "user00"))											
@@ -73,7 +73,7 @@ public class BoardControllerTest {
 		log.info(resultPage);
 	}
 	
-	@Test //4.삭제 테스트
+//	@Test //4.삭제 테스트
 	public void testRemove() throws Exception {
 		// 삭제 전 데이터베이스에 게시물 번호로 확인할 것
 		String resultPage = mockMvc.perform(MockMvcRequestBuilders

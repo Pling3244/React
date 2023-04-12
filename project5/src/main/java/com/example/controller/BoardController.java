@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -42,7 +43,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/get") //3.검색
+	@GetMapping({"/get", "/modify"}) //3.검색
 	public void get(@RequestParam("bno") Long bno, Model model) {
 		log.info("/get");
 		model.addAttribute("board", service.get(bno));
@@ -58,7 +59,9 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@PostMapping("/remove") //5.삭제
+//	@PostMapping("/remove") //5.삭제
+//	@GetMapping("/remove") //5.삭제
+	@RequestMapping(value = "/remove", method = { RequestMethod.GET, RequestMethod.POST })
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr) {
 		
 		log.info("remove..." + bno);
