@@ -36,10 +36,12 @@
 						type="password" class="form-control" placeholder="Password"
 						name='password' required>
 				</div>
-				<button class="btn btn-dark form-control" type="submit" style="background-color: #9933FF;">로그인</button>
+				<button class="btn btn-dark form-control" type="submit" style="background-color: #9966FF;">로그인</button>
 			</form>
 			<div style="text-align: right">
-			<a href = "addMember.jsp" float-right>회원가입</a>
+			
+			<a href = "searchid.jsp">아이디 찾기</a> / <a href = "searchpw.jsp">비밀번호 찾기</a>
+			&nbsp;&nbsp;&nbsp;<a href = "addMember.jsp">회원가입</a>
 			</div>
 <!-- 			</form> -->
 		</div>

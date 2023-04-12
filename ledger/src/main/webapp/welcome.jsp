@@ -14,8 +14,8 @@
             <h1 class="mb-5"></h1>
            		 <h1 class="mb-5">My Web Finance</h1>
                 <h4 class="mb-5"><em>당신의 지출을 관리하세요</em></h4>
-                <a class="btn btn-dark btn-xl" href="<c:url value="/member/loginMember.jsp"/>" style="background-color: #9933FF;">로그인</a>
-                <a class="btn btn-dark btn-xl" href="<c:url value="/member/addMember.jsp"/>" style="background-color: #9933FF;">회원가입</a>
+                <a class="btn btn-dark btn-xl" href="<c:url value="/member/loginMember.jsp"/>" style="background-color: #9966FF;">로그인</a>
+                <a class="btn btn-dark btn-xl" href="<c:url value="/member/addMember.jsp"/>" style="background-color: #9966FF;">회원가입</a>
             </div>
       </header>
 		<h1 class="mb-5"></h1>

@@ -39,6 +39,8 @@
 <table class="table-hover" align="center">
 <thead class="table table-hover">
 <tr style="color: white; background-color: #9966FF" align="center">
+<td><span class="style5">아이디 </span></td>
+<td><span class="style5">업로드일 </span></td>
 <td><span class="style5">거래 날짜 </span></td>
 <td><span class="style5"> 수입/지출 </span></td>
 <td><span class="style5"> 카드/현금 </span></td>
@@ -61,11 +63,11 @@ ResultSet rs = null; // SQL구문의 실행결과를 저장
      String user = "ledger"; 
       String password = "oracle";
 
-      String query = "select * from INOUT where id=?";
+      String query = "select * from INOUT";
 
  conn = DriverManager.getConnection(url, user, password);
 pstmt = conn.prepareStatement(query);
-pstmt.setString(1, sessionId);
+// pstmt.setString(1, sessionId);
 // pstmt.clearParameters();
  rs = pstmt.executeQuery();
 
@@ -76,6 +78,8 @@ pstmt.setString(1, sessionId);
  %>
 <tbody>
 <tr>
+<td class="text-center" width="100"><%= rs.getString("id") %></td>
+<td class="text-center" width="100"><%= rs.getString("updatedate") %></td>
 <td class="text-center" width="100"><%= rs.getString("day") %></td>
 <td class="text-center" width="95">
 <c:if test="<%= bInout%>"><font color="blue"><%= rs.getString("in_or_out") %></font></c:if>
@@ -130,8 +134,8 @@ try {
 	 while(rs.next())
 	 {
 %>
-<a>총 수입 : <%=rs.getString("plus1")%> / 총 지출 : <%=rs.getString("minus1")%></a>
-<h5>잔액 : <%=rs.getString("sum1")%></h5>
+<%-- <a>총 수입 : <%=rs.getString("plus1")%> / 총 지출 : <%=rs.getString("minus1")%></a> --%>
+<%-- <h5>잔액 : <%=rs.getString("sum1")%></h5> --%>
 <%
 }
 }
@@ -145,10 +149,15 @@ catch(SQLException ex){
     // 7. 커넥션 종료
     if(conn != null) try { conn.close(); } catch(SQLException ex) {}
 }%>
+<!-- </div> -->
+<!--  <div class="container px-4 px-lg-5 text-center"> -->
+<!--             <h1 class="mb-4"></h1> -->
+<%--                 <a class="btn btn-dark btn-xl" href="<c:url value="/note/inout.jsp"/>" style="background-color: #9966FF;">작성</a> --%>
+<!--             </div> -->
+<div class="container">
+<a href="/ledger/logout.jsp" class="btn btn=sm btn-success">Logout</a>
+
 </div>
- <div class="container px-4 px-lg-5 text-center">
-            <h1 class="mb-4"></h1>
-                <a class="btn btn-dark btn-xl" href="<c:url value="/note/inout.jsp"/>" style="background-color: #9966FF;">작성</a>
-            </div>
+
 </body>
 </html>

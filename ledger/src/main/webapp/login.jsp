@@ -6,13 +6,16 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
-	<div class="container">
-		<div class="col-lg-4"></div>
-		<div class="col-lg-4">
-			<div class="jumbotron" style="padding-top: 20px;">
-				<form method="post" action="loginAction.jsp">
-					<h1 style="text-align: center;">Login</h1>
-
+<!-- 	<div class="jumbotron"> -->
+		<div class="container" align="center">
+		<h1 class="mb-5"></h1>
+			<h1 class="mb-5"></h1>
+		</div>
+	</div>
+	<div class="jumbotron" align="center">
+		<div class="col-md-4 col-md-offset-4">
+			<h2 class="form-signin-heading">관리자 로그인</h2>
+			<h1 class="mb-5"></h1>
 			<%
 				String error = request.getParameter("error");
 				if (error != null) {
@@ -30,13 +33,9 @@
 					<label for="inputPassword" class="sr-only">Password</label> 
 					<input 	type="password" class="form-control" placeholder="Password" name='j_password' required>
 				</div>
-				<button class="btn btn-dark form-control" type="submit" style="background-color: #9933FF;">로그인</button>
+				<button class="btn btn btn-lg btn-success btn-block" type="submit">로그인</button>
 			</form>
-			<button class="btn btn-dark" type="submit" style="float: right; background-color: #9933FF;">회원가입</button>
 		</div>
-		
-		</div>
-	</div>
 	</div>
 </body>
 </html>
