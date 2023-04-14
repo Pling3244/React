@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.domain.BoardVO;
+import com.example.domain.Criteria;
 import com.example.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -29,9 +30,14 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list") //1.목록 조회
-	public void list(Model model) {
-		log.info("list");
-		model.addAttribute("list", service.getList());
+//	public void list(Model model) {
+//		log.info("list");
+//		model.addAttribute("list", service.getList());
+//	}
+	public void list(Criteria cri, Model model) {
+		
+	log.info("list: " + cri);
+	model.addAttribute("list", service.getList(cri));
 	}
 	
 	@PostMapping("/register") //2.입력

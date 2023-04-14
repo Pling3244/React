@@ -10,6 +10,36 @@
 
 <body class="bg-gradient-primary">
 
+	<script type="text/javascript">
+		$(function() {
+			
+			const formObj = $("#operForm");
+			
+			$('button').on("click",
+					function(e)
+					{
+						e.preventDefault();
+						
+						const operation = $(this).data("oper");
+						
+						console.log(operation);
+						
+						if (operation === 'remove')
+						{
+							formObj.attr("action", "/board/remove");							
+						}
+						else if (operation === 'list')
+						{
+// 							self.location="/board/list";
+							formObj.find("#bno").remove();
+							formObj.attr("action","/board/list")						
+						}
+						formObj.submit();
+					});
+		});
+	
+	</script>
+
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
@@ -53,15 +83,24 @@
 <!-- 								<button data-oper='modify' class="btn btn-default">Modify</button> -->
 <!-- 								<button data-oper='list' class="btn btn-info">List</button> -->
 
-									<button data-oper='modify' class="btn btn-default">
-										<a href="/board/modify?bno=<c:out value="${board.bno}"/>">Modify</a>
-									</button>
-									<button data-oper='remove' class="btn btn-danger">
-										<a href="/board/remove?bno=<c:out value="${board.bno}"/>">Remove</a>
-									</button>
-									<button href="/board/list" data-oper='list' class="btn btn-default">
-										<a href="/board/list">List</a>
-									</button>
+<!-- 									<button data-oper='modify' class="btn btn-default"> -->
+<%-- 										<a href="/board/modify?bno=<c:out value="${board.bno}"/>">Modify</a> --%>
+<!-- 									</button> -->
+<!-- 									<button data-oper='remove' class="btn btn-danger"> -->
+<%-- 										<a href="/board/remove?bno=<c:out value="${board.bno}"/>">Remove</a> --%>
+<!-- 									</button> -->
+<!-- 									<button href="/board/list" data-oper='list' class="btn btn-default"> -->
+<!-- 										<a href="/board/list">List</a> -->
+<!-- 									</button> -->
+
+								<button type="submit" data-oper='modify' class="btn btn-default">Modify</button>
+								<button type="submit" data-oper='remove' class="btn btn-danger">Remove</button>  
+ 								<button type="submit" data-oper='list' class="btn btn-info">List</button>
+ 								
+ 								<form id='operForm' action="/board/modify" method="get">
+ 									<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+ 								</form>
+
 							</div>
 							<!-- end panel-body -->
 						</div>

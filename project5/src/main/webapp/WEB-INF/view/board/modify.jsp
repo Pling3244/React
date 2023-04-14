@@ -30,8 +30,10 @@
 						}
 						else if (operation === 'list')
 						{
-							self.location="/board/list";
-							return;
+// 							self.location="/board/list";							
+							formObj.attr("action","/board/list").attr("method","get");
+							formObj.empty();
+// 							return;
 						}
 						formObj.submit();
 					});
