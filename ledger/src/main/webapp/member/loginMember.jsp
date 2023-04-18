@@ -8,10 +8,10 @@
 <body>
 	<jsp:include page="/menu.jsp" />
 	
-	<div class="container">
+	<div class="container" align="center">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
-			<div class="jumbotron" style="margin: 30px;">
+			<div class="jumbotron" style="margin: 30px;" align="center">
 <!-- 				<form method="post" action="loginAction.jsp"> -->
 					<h1 style="text-align: center;">Login</h1>
 					<h1 class="mb-5"></h1>
