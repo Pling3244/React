@@ -30,7 +30,7 @@
 <!-- 	<div class="jumbotron"> -->
 			<div class="container">
 		  <h1 class="mb-5"></h1>
-			<h1 class="display-5" align="center">가계부 작성</h1>
+			<h1 class="display-5">가계부 작성</h1>
 			<h1 class="mb-5"></h1>
 		</div>
 		
