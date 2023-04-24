@@ -9,6 +9,7 @@ public class MemberVO {
 
 	private String id;
 	private String m_name;
+	private String password;
 	private String gender;
 	private String phone;
 	private String region;
