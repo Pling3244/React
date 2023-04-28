@@ -31,8 +31,11 @@
 
 </head>
 
+
 <body class="bg-gradient-dark">
 
+	<%@ include file="../include/content_topbar.jsp" %>
+	
     <div class="container">
 
         <!-- Outer Row -->

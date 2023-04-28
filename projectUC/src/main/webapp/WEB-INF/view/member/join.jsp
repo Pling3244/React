@@ -32,6 +32,8 @@
 
 <body class="bg-gradient-dark">
 
+  <%@ include file="../include/content_topbar.jsp" %>
+
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">

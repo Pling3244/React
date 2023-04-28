@@ -39,5 +39,12 @@ public class RootConfig {
 			sqlSessionFactory.setDataSource(dataSource());
 			return (SqlSessionFactory) sqlSessionFactory.getObject();
 	}
-	
+
+//	@Bean
+//	public CommonsMultipartResolver multipartResolver() {
+//		CommonsMultipartResolver resolver = new CommonsMultipartResolver(); 
+//		resolver.setMaxUploadSize(5248800);
+//		resolver.setMaxInMemorySize(10485760);
+//		return resolver; 
+//	}
 }
