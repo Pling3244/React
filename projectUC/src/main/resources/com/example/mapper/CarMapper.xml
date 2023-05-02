@@ -76,8 +76,21 @@
   		
   	</select> 
 
+<!-- 검색 대상 카테고리 리스트 -->	
+	<select id="getCateList" resultType="String">
+	
+		select distinct cateCode from uc_car where select distinct cateCode from uc_car where
+	
+	</select>
 
-
+<!-- 카테고리 정보(+검색대상 갯수) -->		
+	<select id="getCateInfo" resultType="com.example.domain.CateFilterVO">
+	
+		select DISTINCT count(*) cateCount, a.cateCode,b.cateName 
+where (num = #{num or num = #{num...)
+and a.cateCode = #{cateCode}
+	
+	</select>
 	
 	<!-- 아이디 중복검사 -->
   	<select id="idCheck" resultType="int">
@@ -86,5 +99,4 @@
   	
   	</select>
 	
-
 </mapper>

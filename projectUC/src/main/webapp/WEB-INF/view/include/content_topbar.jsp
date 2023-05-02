@@ -10,14 +10,14 @@
 
 					<a class="h5 mb-0 text-white mx-2 my-auto" href="/main">Home</a>
 
-					<li class="nav-item dropdown">
+					<div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                               		
                        				<span class="h5 mb-0 text-white mx-1 my-auto">Car</span>                   		            		   			
 <!--                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>                               -->
 <!--                             </a> -->
 <!--                             Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="/carlist/goods">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -37,7 +37,7 @@
 <!--                                     Logout -->
 <!--                                 </a> -->
                             </div>
-                        </li>
+                        </div>
 
                     <!-- Topbar Search -->
                     <form
@@ -215,7 +215,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                                               		
-                       				<span class="h5 mb-0 text-whit mx-1 my-auto">${member.id}</span>                   		            		   			
+                       				<span class="h5 mb-0 text-white mx-1 my-auto">${member.id}</span>                   		            		   			
 <!--                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>                               -->
 <!--                             </a> -->
 <!--                             Dropdown - User Information -->

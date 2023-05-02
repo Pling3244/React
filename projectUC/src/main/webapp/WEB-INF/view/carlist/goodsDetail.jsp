@@ -3,23 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <!DOCTYPE html>
+<html>
 
 <%@ include file="../include/modal.jsp"%>
 <%@ include file="../include/header.jsp"%>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">	
 </script>
-<style type="text/css">
-	#result_card img{
-		max-width: 100%;
-	    height: auto;
-	    display: block;
-	    padding: 5px;
-	    margin-top: 10px;
-	    margin: auto;	
-	}
-</style>
 
 <body id="page-top">
 
@@ -46,27 +38,40 @@
 					<div class="row">
 					
 							<!-- Earnings (Monthly) Card Example -->							
-								<div class="col-xl-3 col-md-6 mb-4">
+								<div class="col-xl-3 col-md-7 mb-4 align-items-center">
 									<div class="card border-left-primary shadow h-100 py-2">
 										<div class="card-body">
 											<div class="row no-gutters align-items-center">
 												<div class="col mr-2">
 													<div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
+														<div class="image_wrap1"><img></div>
+													
+														
+														<c:forEach items="${goodsInfo.imageList}" var="i">
 														<div class="image_wrap"
-														data-num="${goodsInfo.imageList[0].num}"
-														data-path="${goodsInfo.imageList[0].uploadPath}"
-														data-uuid="${goodsInfo.imageList[0].uuid}"
-														data-filename="${goodsInfo.imageList[0].fileName}"><img></div>													
-														<h3 style="display:inline">${goodsInfo.cop_name} ${goodsInfo.br_name} ${goodsInfo.car_name}</h3>
+														data-num="<c:out value="${i.num}"/>"
+														data-path="<c:out value="${i.uploadPath}"/>"
+														data-uuid="<c:out value="${i.uuid}"/>"
+														data-filename="<c:out value="${i.fileName}"/>"><img></div>
+														</c:forEach>
+														<hr>													
+														<h4 style="display:inline"><b>${goodsInfo.cop_name} ${goodsInfo.br_name} ${goodsInfo.car_name}</b></h4>
 														<h5 style="display:inline">(${goodsInfo.model_year})</h5>&nbsp;
-														<a class="btn btn-primary btn-xl">${goodsInfo.owner}</a>
+														<div class ="owncolor"  style="display:inline">
+															<c:if test="${goodsInfo.owner eq '실차주'}"> 
+																<a class="btn btn-primary btn-xl" style="display:inline; font-size:0.5em">${goodsInfo.owner}</a>
+															</c:if>
+															<c:if test="${goodsInfo.owner ne '실차주'}"> 
+																<a class="btn btn-warning" style="display:inline; font-size:0.5em">${goodsInfo.owner}</a>
+															</c:if>
+														</div>
 														<hr>
 														<h5>${goodsInfo.fuel_type} / ${goodsInfo.color} / ${goodsInfo.number_p}인승</h5>
 														<h4>주행거리 : ${goodsInfo.mileage}Km</h4>
-														<h4 style="color:blue">판매가격 : ${goodsInfo.price}만원</h4>
-														<textarea rows="5" cols="35" wrap="hard" readonly="readonly"><c:out value="${goodsInfo.uc_text}"/></textarea> 
+														<h4 style="color:blue"><b>판매가격 : ${goodsInfo.price}만원</b></h4>
+														<textarea rows="5" cols="35" wrap="hard" style="font-size:1.3em" readonly="readonly"><c:out value="${goodsInfo.uc_text}"/></textarea> 
 														<hr>
-														<h5 style="display:inline">판매자 : ${goodsInfo.seller}</h5>
+														<h5 style="display:inline">판매자 : <b>${goodsInfo.seller}</b></h5>
 														<div style="display:inline; font-size:2em" type="button" href="/main">
 														<i class="fas fa-envelope fa-fw"></i></div>
 														<h5 style="text-align:right; font-size:1em">작성일 : ${goodsInfo.regdate1}</h5>
@@ -114,18 +119,21 @@ $(document).ready(function(){
 	/* 이미지 삽입 */
 	const bobj = $(".image_wrap");
 	
-	if(bobj.data("num")){
-		const uploadPath = bobj.data("path");
-		const uuid = bobj.data("uuid");
-		const fileName = bobj.data("filename");
-		
-		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
-		
-		bobj.find("img").attr('src', '/display?fileName=' + fileCallPath);
-	} else {
-		bobj.find("img").attr('src', '/resources/img/noimage.png');
+	for(var i = 0; i<bobj.length; i++){		
+				
+		if( $(bobj[i]).data("num")){
+			const uploadPath = $(bobj[i]).data("path");		
+			const uuid = $(bobj[i]).data("uuid");
+			const fileName = $(bobj[i]).data("filename");
+			
+	// 		const fileCallPath = encodeURIComponent(uploadPath + "/s_" + uuid + "_" + fileName);
+			 $(bobj[i]).find("img").attr('src', '/resources/upload/'+ uploadPath + "/s_" + uuid + "_" + fileName);			
+		}			
 	}
-});	
+	if(bobj.length ==0 ) {
+		$(".image_wrap1").find("img").attr('src', '/resources/img/noimage.png');		
+	}
+});
 </script>
 
 </html>

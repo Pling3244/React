@@ -90,13 +90,36 @@ public class CarMapperTest {
 	}
 	
 	/* 상품 정보 */
-	@Test
+//	@Test
 	public void getGoodsInfo() {
 		int num = 3;
 		CarVO goodsInfo = mapper.getGoodsInfo(num);
 		System.out.println("===========================");
 		System.out.println(goodsInfo);
 		System.out.println("===========================");
+		
+		
+	}
+	
+	/* 카테고리 리스트 */
+	@Test
+	public void getCateListTest1() {
+		
+		Criteria cri = new Criteria();
+		
+		String type = "TC";
+		String keyword = "test";
+		//String type = "A";
+		//String keyword = "유홍준";		
+
+		cri.setType(type);
+		cri.setKeyword(keyword);
+		//cri.setAuthorArr(mapper.getAuthorIdList(keyword));		
+		
+		String[] cateList = mapper.getCateList(cri)		;
+		for(String codeNum : cateList) {
+			System.out.println("codeNum ::::: " + codeNum);
+		}
 		
 		
 	}

@@ -200,11 +200,13 @@ public class CarController {
 			list.add(vo);
 		}
 		ResponseEntity<List<ImageVO>> result = new ResponseEntity<List<ImageVO>>(list, HttpStatus.OK);
+		
 		return result;
 	}
 
 	/* 이미지 출력 */
 	@GetMapping("/display")
+	@ResponseBody
 	public ResponseEntity<byte[]> getImage(String fileName) {
 
 		logger.info("getImage()........" + fileName);
