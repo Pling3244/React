@@ -12,8 +12,5 @@ public class CateFilterVO {
 	private String cateCode;;
 	
 	/* 카테고리 상품 수 */
-	private int cateCount;	
-	
-	/* 국내,국외 분류 */
-	private String cateGroup;
+	private int cateCount;
 }

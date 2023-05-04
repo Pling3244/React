@@ -55,7 +55,7 @@
 														data-filename="<c:out value="${i.fileName}"/>"><img></div>
 														</c:forEach>
 														<hr>													
-														<h4 style="display:inline"><b>${goodsInfo.cop_name} ${goodsInfo.br_name} ${goodsInfo.car_name}</b></h4>
+														<h4 style="display:inline"><b>${goodsInfo.copName} ${goodsInfo.brName} ${goodsInfo.car_name}</b></h4>
 														<h5 style="display:inline">(${goodsInfo.model_year})</h5>&nbsp;
 														<div class ="owncolor"  style="display:inline">
 															<c:if test="${goodsInfo.owner eq '실차주'}"> 

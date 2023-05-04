@@ -3,6 +3,7 @@ package com.example.service;
 import java.util.List;
 
 import com.example.domain.CarVO;
+import com.example.domain.CateVO;
 import com.example.domain.Criteria;
 
 public interface CarService {
@@ -18,4 +19,10 @@ public interface CarService {
 	
 	/* 상품 정보 */
 	public CarVO getGoodsInfo(int num);
+	
+	/* 카테고리 리스트 */
+	public List<CateVO> cateList();
+	
+	/* 검색 기능 */
+	public List<CarVO> searchList(CarVO car, Criteria cri);
 }

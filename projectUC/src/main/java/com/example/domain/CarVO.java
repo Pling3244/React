@@ -12,7 +12,9 @@ public class CarVO {
 	private String br_name;
 	private String car_name;
 	private String price;
-	private int mileage;
+	private String price_min;
+	private String price_max;
+	private String mileage;
 	private int model_year;
 	private String fuel_type;
 	private String color;
@@ -26,7 +28,8 @@ public class CarVO {
 	private int num;
 	private String uc_text;
 	private List<ImageVO> imageList;
-//	private MultipartFile[] car_img;
-	private String owner;
+	private String owner;	
+	private String copName;
+	private String brName;
 	
 }

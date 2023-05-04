@@ -36,8 +36,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.domain.CarVO;
 import com.example.domain.Criteria;
 import com.example.domain.ImageVO;
+import com.example.domain.PageVO;
 import com.example.service.AttachService;
 import com.example.service.CarService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -72,9 +74,44 @@ public class CarController {
 			return;
 		}
 		
-//		/* 페이지 인터페이스 데이터 */
-//		model.addAttribute("pageMaker", new PageDTO(cri, service.goodsGetTotal(cri)));
+//		/* 검색 데이터 */
+//		List search = service.searchList(car);
+//		
+//		model.addAttribute("search", search);
+						
+		/* 페이지 인터페이스 데이터 */
+		model.addAttribute("pageMaker", new PageVO(cri, service.goodsGetTotal(cri)));
 	}
+	
+	/* 상품 검색 */
+	@RequestMapping(value="search",  method = RequestMethod.GET)
+	public String searchGoodsGET(CarVO car, Criteria cri, Model model) throws Exception {
+		
+		logger.info("car, cri : " + car + cri);
+		
+		List<CarVO> list = service.searchList(car, cri);
+		logger.info("pre list : " + list);
+		if(!list.isEmpty()) {
+			model.addAttribute("list", list);
+			logger.info("list : " + list);
+		} else {
+			model.addAttribute("listcheck", "empty");
+						
+		}
+
+		model.addAttribute("pageMaker", new PageVO(cri, service.goodsGetTotal(cri)));
+		
+		ObjectMapper objl = new ObjectMapper();
+		
+		List list1 = service.cateList();
+		
+		String cateList = objl.writeValueAsString(list1);
+		
+		model.addAttribute("cateList", cateList);
+		
+		return "carlist/search";
+				
+	}	
 	
 	/* 상품 상세 */
 	@GetMapping("/goodsDetail/{num}")
@@ -89,9 +126,20 @@ public class CarController {
 	
 	/* 차량등록 페이지 이동 */
 	@RequestMapping(value = "carRegist", method = RequestMethod.GET)
-	public void carRegistGET() {
+	public void carRegistGET(Model model) throws Exception {
 
 		logger.info("판매등록 페이지 진입");
+		
+		ObjectMapper objm = new ObjectMapper();
+		
+		List list = service.cateList();
+		
+		String cateList = objm.writeValueAsString(list);
+		
+		model.addAttribute("cateList", cateList);
+		
+//		logger.info("변경 전.........." + list);
+//		logger.info("변경 후.........." + cateList);
 
 	}
 

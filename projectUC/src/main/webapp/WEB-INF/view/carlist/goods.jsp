@@ -10,9 +10,9 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-	crossorigin="anonymous">
-	
+	crossorigin="anonymous">	
 </script>
+<link href="/resources/css/page.css" rel="stylesheet">
 
 <style type="text/css">
 #result_card img {
@@ -46,40 +46,42 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
+				
+				<div class="d-sm align-items-center justify-content-between mb-4">
+<!-- 						<h3 class="h5 mb-0 text-gray-800">검색 카테고리</h3> -->
+						<div class="col-lg-7">
+						<form name='form' id="searchForm" action="search" method="get">								
+								<div class="form-group row">
+									<div class="col-sm-2.4 mb-1 mb-sm-0">
+										<select name="region" class="form-control form-control-user cate1">
+											<option value="">-매매지역-</option> 
+											<option value="서울">서울</option>
+											<option value="인천">인천</option>
+											<option value="대전">대전</option>
+											<option value="대구">대구</option>
+											<option value="광주">광주</option>
+											<option value="부산">부산</option>
+											<option value="울산">울산</option>
+											<option value="세종">세종</option>
+											<option value="경기">경기</option>
+											<option value="강원">강원</option>
+											<option value="경남">경남</option>
+											<option value="경북">경북</option>
+											<option value="전남">전남</option>
+											<option value="전북">전북</option>
+											<option value="충남">충남</option>
+											<option value="충북">충북</option>
+											<option value="제주">제주</option>
+											<option value="기타">기타</option>											
+										</select>
+									</div>	
+								</div>
+								<button class="btn btn-primary btn-user btn-block">검색</button>
+						</form>
+						</div>
+				</div>
 
-					<!-- Page Heading -->
-					<div class="navi_bar_area">
-						<div class="dropdown">
-							<button class="dropbtn">
-								국내 <i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="#">테스트1</a> 
-								<a href="#">테스트2</a> 
-								<a href="#">테스트3</a> 
-								<a href="#">테스트4</a> 
-								<a href="#">테스트5</a> 
-								<a href="#">테스트6</a>
-							</div>
-						</div>
-						<div class="dropdown">
-							<button class="dropbtn">
-								국외 <i class="fa fa-caret-down"></i>
-							</button>
-							<div class="dropdown-content">
-								<a href="#">테스트1</a> 
-								<a href="#">테스트2</a> 
-								<a href="#">테스트3</a> 
-								<a href="#">테스트4</a> 
-								<a href="#">테스트5</a> 
-								<a href="#">테스트6</a>
-							</div>
-						</div>
-					</div>
-					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Cards</h1>
-					</div>
+					<hr>									
 
 					<div class="row">
 						<c:if test="${listcheck != 'empty'}">
@@ -93,12 +95,12 @@
 												<div class="col mr-2">
 													<div class="col-auto" id="uploadResult">
 														${list.num}
-														<!--  												<i class="fas fa-calendar fa-2x text-gray-300"></i>  -->
+														<!--  <i class="fas fa-calendar fa-2x text-gray-300"></i>  -->
 													</div>
 													<div
 														class="text-xs font-weight-bold text-dark text-uppercase mb-1">
-														<c:out value="${list.cop_name}"></c:out>
-														<c:out value="${list.br_name}"></c:out>
+														<c:out value="${list.copName}"></c:out>
+														<c:out value="${list.brName}"></c:out>
 														<c:out value="${list.car_name}"></c:out>
 													</div>
 													<div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -118,6 +120,40 @@
 							</c:forEach>
 						</c:if>
 					</div>
+					
+					<!-- 페이지 이름 인터페이스 영역 -->
+                	<div class="pageMaker_wrap">
+                		<ul class="pageMaker">
+                			
+                			<!-- 이전 버튼 -->
+                			<c:if test="${pageMaker.prev }">
+                				<li class="pageMaker_btn prev">
+                					<a href="${pageMaker.pageStart -1}">이전</a>
+                				</li>
+                			</c:if>
+                			
+                			<!-- 페이지 번호 -->
+                			<c:forEach begin="${pageMaker.pageStart }" end="${pageMaker.pageEnd }" var="num">
+                				<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? 'active':''}">
+                					<a href="${num}">${num}</a>
+                				</li>	
+                			</c:forEach>
+                		
+	                    	<!-- 다음 버튼 -->
+	                    	<c:if test="${pageMaker.next}">
+	                    		<li class="pageMaker_btn next">
+	                    			<a href="${pageMaker.pageEnd + 1 }">다음</a>
+	                    		</li>
+	                    	</c:if>
+	                    </ul>
+                	</div>
+                	
+                	<form id="moveForm" action="/admin/goodsManage" method="get" >
+ 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+                	</form>
+                	
 					<!-- End of Main Content -->
 
 					<%@ include file="../include/footer.jsp"%>
@@ -135,6 +171,7 @@
 </body>
 
 <script>
+
 	/* 이미지 정보 호출 */
 
 	let uploadReslut = $("#uploadResult");
@@ -174,6 +211,17 @@
 						uploadResult.html(str);
 
 					});
+	
+	/* 페이지 이동 버튼 */
+	$(".pageMaker_btn a").on("click", function(e){
+		
+		e.preventDefault();
+		
+		moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+		
+		moveForm.submit();
+		
+	});
 </script>
 
 </html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.CarVO;
+import com.example.domain.CateVO;
 import com.example.domain.Criteria;
 import com.example.mapper.AttachMapper;
 import com.example.mapper.CarMapper;
@@ -64,4 +65,20 @@ public class CarServiceImpl implements CarService {
 		
 		return goodsInfo;
 }
+	
+	/* 카테고리 리스트 */
+	@Override
+	public List<CateVO> cateList() {
+		
+		log.info("(service)cateList........");
+		
+		return mapper.cateList();
+	}
+	
+	/* 검색 기능 */
+	@Override
+	public List<CarVO> searchList(CarVO car, Criteria cri) {
+		log.info("searchList()..........");
+		return mapper.searchList(car, cri);
+	}
 }

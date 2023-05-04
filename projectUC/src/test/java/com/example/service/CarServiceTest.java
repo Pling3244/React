@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.example.domain.CarVO;
+import com.example.domain.Criteria;
 import com.example.domain.ImageVO;
 
 import lombok.Setter;
@@ -94,7 +95,7 @@ public class CarServiceTest {
     }
 
     /*상품 상세 정보*/
-	@Test
+//	@Test
 	public void getGoodsInfoTest() {
 		
 		int num = 19;
@@ -106,4 +107,20 @@ public class CarServiceTest {
 		System.out.println("bookId : " + goodsInfo.getNum() );
 		System.out.println("이미지 정보 : " + goodsInfo.getImageList().isEmpty());
 }
+	
+	/* 검색 기능 */
+	@Test
+	public void searchListTest() throws Exception{
+		
+		Criteria cri = new Criteria();
+		CarVO car = new CarVO();		
+		
+//		car.setCop_name("100000");
+		
+//		car.setRegion("서울");
+		
+		List<CarVO> list = service.searchList(car, cri);
+						
+		System.out.println("result......." + list);
+	}
 }

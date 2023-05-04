@@ -49,41 +49,6 @@
 	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 	crossorigin="anonymous">  </script>
 
-<script>  
-  function changes1Step(fr) {
-	  if(fr=="현대") {
-	   num = new Array("--브랜드명--", "아반떼","그랜저","제네시스","스타렉스","포터");
-	   vnum = new Array("--브랜드명--", "아반떼","그랜저","제네시스","스타렉스","포터");
-	  }
-	  else if(fr=="기아") {
-	   num = new Array("--브랜드명--", "K3","K5","K7","K9","모닝");
-	   vnum = new Array("--브랜드명--", "K3","K5","K7","K9","모닝");
-	  }
-	  else if(fr=="한국GM") {
-		num = new Array("--브랜드명--", "쉐보레 스파크","쉐보레 크루즈","쉐보레 올란도","쉐보레 말리부");
-		vnum = new Array("--브랜드명--", "쉐보레 스파크","쉐보레 크루즈","쉐보레 올란도","쉐보레 말리부");
-	  }
-	  else if(fr=="KG모빌리티") {
-		num = new Array("--브랜드명--", "코란도","티볼리","렉스턴","액티언","체어맨");
-		vnum = new Array("--브랜드명--", "코란도","티볼리","렉스턴","액티언","체어맨");
-	  }
-	  else if(fr=="르노코리아") {
-		num = new Array("--브랜드명--", "SM3","SM5","SM7","QM6");
-		vnum = new Array("--브랜드명--", "SM3","SM5","SM7","QM6");
-	  }
-	  else if(fr=="기타") {
-		num = new Array("--브랜드명--", "굴삭기","버스","전기차","트럭","트레일러","기타");
-		vnum = new Array("--브랜드명--", "굴삭기","버스","전기차","트럭","트레일러","기타");
-	  }	  
-	  for(i=0; i<form.br_name.length; i++) {
-	   form.br_name.options[i] = null;
-	  }
-	  for(i=0; i<num.length; i++) {
-		   form.br_name.options[i] = new Option(num[i],vnum[i]);
-	  }
-}
-</script>
-
 <body class="bg-gradient-dark">
 
 	<%@ include file="../include/content_topbar.jsp"%>
@@ -106,15 +71,8 @@
 								<div class="form-group row">
 									<b>회사명</b>
 									<div class="col-sm-6 mb-3 mb-sm-0">
-										<select name="cop_name" class="form-control form-control-user"
-											onchange='changes1Step(value)'>
-											<option value="">--회사명--</option>
-											<option value="현대">현대</option>
-											<option value="기아">기아</option>
-											<option value="한국GM">한국GM</option>
-											<option value="KG모빌리티">KG모빌리티</option>
-											<option value="르노코리아">르노코리아</option>
-											<option value="기타">기타</option>
+										<select name="cop_name" class="form-control form-control-user cate1">
+											<option selected value="none">--회사명--</option> 											
 										</select>
 									</div>
 									<!--                                    <span class="id_input_re_1">사용 가능한 아이디입니다.</span> -->
@@ -124,8 +82,8 @@
 								<div class="form-group row">
 									<b>브랜드명</b>
 									<div class="col-sm-6 mb-3 mb-sm-0 ">
-										<select name="br_name" class="form-control form-control-user">
-											<option>--브랜드명--</option>
+										<select name="br_name" class="form-control form-control-user cate2">
+											<option selected value="none">--브랜드명--</option>
 										</select>
 									</div>
 									<!--                                     <span class="final_name_ck">이름을 입력해주세요.</span>   -->
@@ -399,6 +357,57 @@
 			$("#regist_form").attr("action", "/carlist/carRegist");
 			$("#regist_form").submit();
 
+		});
+		
+		/* 카테고리 */
+		let cateList = JSON.parse('${cateList}');
+		
+		let cate1Array = new Array();
+		let cate2Array = new Array();		
+		let cate1Obj = new Object();
+		let cate2Obj = new Object();
+		
+		let cateSelect1 = $(".cate1");		
+		let cateSelect2 = $(".cate2");
+		
+		/* 카테고리 배열 초기화 메서드 */
+		function makeCateArray(obj,array,cateList, tier){
+			for(let i = 0; i < cateList.length; i++){
+				if(cateList[i].tier === tier){
+					obj = new Object();
+					
+					obj.cateName = cateList[i].cateName;
+					obj.cateCode = cateList[i].cateCode;
+					obj.cateParent = cateList[i].cateParent;
+					
+					array.push(obj);				
+					
+				}
+			}
+		}	
+		
+		/* 배열 초기화 */
+		makeCateArray(cate1Obj,cate1Array,cateList,1);
+		makeCateArray(cate2Obj,cate2Array,cateList,2);
+		
+		for(let i = 0; i < cate1Array.length; i++){
+			cateSelect1.append("<option value='"+cate1Array[i].cateCode+"'>" + cate1Array[i].cateName + "</option>");
+		}
+		
+		/* 중분류 <option> 태그 */
+		$(cateSelect1).on("change",function(){
+			
+			let selectVal1 = $(this).find("option:selected").val();	
+			
+			cateSelect2.children().remove();
+			
+			cateSelect2.append("<option value='none'>--브랜드명--</option>");
+			
+			for(let i = 0; i < cate2Array.length; i++){
+				if(selectVal1 === cate2Array[i].cateParent){
+					cateSelect2.append("<option value='"+cate2Array[i].cateCode+"'>" + cate2Array[i].cateName + "</option>");	
+				}
+			}// for
 		});
 	</script>	
 </html>
