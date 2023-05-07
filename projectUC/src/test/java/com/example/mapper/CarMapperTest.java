@@ -36,7 +36,7 @@ public class CarMapperTest {
 		car.setBr_name("모닝");
 		car.setCar_name("GV80");
 		car.setPrice("1000");
-		car.setMileage(12000);
+		car.setMileage("12000");
 		car.setModel_year(2020);
 		car.setFuel_type("가솔린");
 		car.setColor("검정");
@@ -110,7 +110,7 @@ public class CarMapperTest {
 	}
 	
 	/* 검색 기능 */
-	@Test
+//	@Test
 	public void searchListTest() throws Exception{
 		
 		Criteria cri = new Criteria();
@@ -118,11 +118,59 @@ public class CarMapperTest {
 		
 //		car.setCop_name("100000");
 		
-		car.setMileage(12600);
+		car.setMileage("12600");
 		
 		List<CarVO> list = mapper.searchList(car, cri);
 						
 		System.out.println("result......." + list);
+	}
+	
+	/* 상품 정보 수정 */
+//	@Test
+	public void goodsModifyTest() {
+		
+		CarVO car = new CarVO();
+		
+		car.setNum(2);
+		car.setCop_name("100000");
+		car.setBr_name("102000");
+		car.setCar_name("gg");
+		car.setPrice("2700");
+		car.setMileage("6000");
+		car.setModel_year(2020);
+		car.setFuel_type("가솔린");
+		car.setColor("검정색");
+		car.setRegion("인천");
+		car.setNumber_p(5);
+		car.setOwner("실차주 아님");
+		car.setUc_text("헤헤");
+		
+		mapper.goodsModify(car);
+		
+	}
+	
+	/* 지정 상품 이미지 삭제 */
+//	@Test
+	public void deleteImageAllTest() {
+		
+		int num = 1;
+		
+		mapper.deleteImageAll(num);
+		
+	}
+	
+	/* 상품 정보 삭제 */
+//	@Test
+	public void goodsDeleteTest() {
+		
+		int num = 24;
+		
+		int result = mapper.goodsDelete(num);
+		
+		if(result == 1) {
+			System.out.println("삭제 성공");
+		}
+		
 	}
 	
 //	/* 카테고리 리스트 */

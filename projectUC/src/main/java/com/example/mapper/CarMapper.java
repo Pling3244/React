@@ -26,6 +26,15 @@ public interface CarMapper {
 	/* 상품 정보 */
 	public CarVO getGoodsInfo(int num);
 	
+	/* 상품 수정 */
+	public int goodsModify(CarVO car);
+	
+	/* 지정 상품 이미지 전체 삭제 */
+	public void deleteImageAll(int num);
+	
+	/* 상품 정보 삭제 */
+	public int goodsDelete(int num);
+	
 	/* 카테고리 리스트 */
 	public List<CateVO> cateList();
 	

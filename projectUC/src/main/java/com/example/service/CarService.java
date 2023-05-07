@@ -20,9 +20,16 @@ public interface CarService {
 	/* 상품 정보 */
 	public CarVO getGoodsInfo(int num);
 	
+	/* 상품 수정 */
+	public int goodsModify(CarVO car);
+	
+	/* 상품 정보 삭제 */
+	public int goodsDelete(int num);
+	
 	/* 카테고리 리스트 */
 	public List<CateVO> cateList();
 	
 	/* 검색 기능 */
 	public List<CarVO> searchList(CarVO car, Criteria cri);
+
 }

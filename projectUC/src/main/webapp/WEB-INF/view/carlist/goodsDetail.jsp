@@ -31,24 +31,22 @@
 
 					<!-- Page Heading -->
 					<div
-						class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Cards</h1>
+						class="d-sm-flex align-items-center">
+						<h1 class="h3 mb-0 text-gray-800">차량 정보</h1>
 					</div>
 
 					<div class="row">
 					
 							<!-- Earnings (Monthly) Card Example -->							
 								<div class="col-xl-3 col-md-7 mb-4 align-items-center">
-									<div class="card border-left-primary shadow h-100 py-2">
+									<div class="card border-left-primary shadow w-200 h-100 py-2">
 										<div class="card-body">
-											<div class="row no-gutters align-items-center">
+											<div class="row no-gutters align-items-center justify-content-center">
 												<div class="col mr-2">
 													<div class="text-xs font-weight-bold text-dark text-uppercase mb-1">
 														<div class="image_wrap1"><img></div>
-													
-														
 														<c:forEach items="${goodsInfo.imageList}" var="i">
-														<div class="image_wrap"
+														<div class="image_wrap" 
 														data-num="<c:out value="${i.num}"/>"
 														data-path="<c:out value="${i.uploadPath}"/>"
 														data-uuid="<c:out value="${i.uuid}"/>"
@@ -66,8 +64,8 @@
 															</c:if>
 														</div>
 														<hr>
-														<h5>${goodsInfo.fuel_type} / ${goodsInfo.color} / ${goodsInfo.number_p}인승</h5>
-														<h4>주행거리 : ${goodsInfo.mileage}Km</h4>
+														<h5><b>&lt;${goodsInfo.region}&gt; ${goodsInfo.fuel_type} / ${goodsInfo.color} / ${goodsInfo.number_p}인승</b></h5>
+														<h4 style="color:brown"><b>주행거리 : ${goodsInfo.mileage}Km</b></h4>
 														<h4 style="color:blue"><b>판매가격 : ${goodsInfo.price}만원</b></h4>
 														<textarea rows="5" cols="35" wrap="hard" style="font-size:1.3em" readonly="readonly"><c:out value="${goodsInfo.uc_text}"/></textarea> 
 														<hr>
@@ -76,22 +74,23 @@
 														<i class="fas fa-envelope fa-fw"></i></div>
 														<h5 style="text-align:right; font-size:1em">작성일 : ${goodsInfo.regdate1}</h5>
 														<h5 style="text-align:right; font-size:1em">수정일 : ${goodsInfo.updatedate1}</h5>													
-														
-														
 														</div>
 														</div>												
 													</div>
-													<div class="h5 mb-0 font-weight-bold text-gray-800">													
-														
-													</div>
-													<div
-														class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-
-													</div>
-												</div>
-												<div class="col-auto" id="uploadResult">
-<!-- 												<i class="fas fa-calendar fa-2x text-gray-300"></i> -->
-												</div>
+													<form id="moveForm" method="get">
+													<div class="btn_section">
+                   										<a class="btn" href="/carlist/search">&lt;&lt;&nbsp;상품 목록</a>
+                   										<c:if test="${ member != null and goodsInfo.seller == member.id }">
+                   										
+	                    								<button id="modifyBtn" class="btn enroll_btn">수정 </button>
+	                    								
+<!-- 	                    								<form id="moveForm" method="post">	 -->
+	                    								<button id="deleteBtn" class="btn enroll_btn">삭제 </button>
+<!-- 	                    								</form> -->
+	                    								</c:if>
+	                    							</div> 
+													</form>										
+												</div>																																			
 											</div>
 										</div>
 
@@ -133,6 +132,26 @@ $(document).ready(function(){
 	if(bobj.length ==0 ) {
 		$(".image_wrap1").find("img").attr('src', '/resources/img/noimage.png');		
 	}
+});
+
+/* 수정 페이지 이동 */
+$("#modifyBtn").on("click", function(e){
+	e.preventDefault();
+	let addInput = '<input type="hidden" name="num" value="${num}">';
+	$("#moveForm").append(addInput);
+	$("#moveForm").attr("action", "/carlist/goodsModify");
+	$("#moveForm").submit();
+});	
+
+/* 삭제 버튼 */
+$("#deleteBtn").on("click", function(e){
+	e.preventDefault();
+	let moveForm = $("#moveForm");
+	moveForm.find("input").remove();
+	moveForm.append('<input type="hidden" name="num" value="${num}">');
+	moveForm.attr("action", "/carlist/goodsDelete");
+	moveForm.attr("method", "post");
+	moveForm.submit();
 });
 </script>
 

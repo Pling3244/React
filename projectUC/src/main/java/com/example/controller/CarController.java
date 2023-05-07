@@ -39,6 +39,7 @@ import com.example.domain.ImageVO;
 import com.example.domain.PageVO;
 import com.example.service.AttachService;
 import com.example.service.CarService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
@@ -124,6 +125,48 @@ public class CarController {
 		return "/carlist/goodsDetail";
 	}
 	
+	/* 차량수정 페이지 이동 */
+	@RequestMapping(value = "goodsModify", method = RequestMethod.GET)
+	public void updateGET(int num, Model model) throws JsonProcessingException {
+											
+		logger.info("판매수정 페이지 진입");
+		
+		ObjectMapper obj2 = new ObjectMapper();
+										
+		model.addAttribute("cateList", obj2.writeValueAsString(service.cateList()));
+		
+		model.addAttribute("goodsInfo", service.getGoodsInfo(num));
+		
+	}
+
+	/* 상품 정보 수정 */
+	@PostMapping("/goodsModify")
+	public String goodsModifyPOST(CarVO car, RedirectAttributes rttr) {
+		
+		logger.info("goodsModifyPOST.........." + car);
+		
+		int result = service.goodsModify(car);
+		
+		rttr.addFlashAttribute("modify_result", result);
+		
+		return "redirect:/carlist/search";		
+		
+	}
+	
+	/* 상품 정보 삭제 */
+	@PostMapping("/goodsDelete")
+	public String goodsDeletePOST(int num, RedirectAttributes rttr) {
+		
+		logger.info("goodsDeletePOST..........");
+		
+		int result = service.goodsDelete(num);
+		
+		rttr.addFlashAttribute("delete_result", result);
+		
+		return "redirect:/carlist/search";
+		
+	}
+	
 	/* 차량등록 페이지 이동 */
 	@RequestMapping(value = "carRegist", method = RequestMethod.GET)
 	public void carRegistGET(Model model) throws Exception {
@@ -152,9 +195,9 @@ public class CarController {
 
 		service.register(car);
 
-		rttr.addFlashAttribute("regist", car.getNum());
+		rttr.addFlashAttribute("regist_result", car.getNum());
 
-		return "redirect:/main";
+		return "redirect:/carlist/search";
 	}
 
 	/* 첨부 파일 업로드 */
@@ -184,7 +227,7 @@ public class CarController {
 			}
 		}
 
-		String uploadFolder = "C:\\Users\\admin\\git\\test\\projectUC\\src\\main\\webapp\\resources\\upload";
+		String uploadFolder = "C:\\Users\\okmij\\git\\test\\projectUC\\src\\main\\webapp\\resources\\upload";
 
 		/* 날짜 폴더 경로 */
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -260,7 +303,7 @@ public class CarController {
 		logger.info("getImage()........" + fileName);
 
 		File file = new File(
-				"C:\\Users\\admin\\git\\test\\projectUC\\src\\main\\webapp\\resources\\upload\\" + fileName);
+				"C:\\Users\\okmij\\git\\test\\projectUC\\src\\main\\webapp\\resources\\upload\\" + fileName);
 
 		ResponseEntity<byte[]> result = null;
 
@@ -289,12 +332,12 @@ public class CarController {
 		
 		try {
 			/* 썸네일 파일 삭제 */
-			file = new File("C:\\\\Users\\\\admin\\\\git\\\\test\\\\projectUC\\\\src\\\\main\\\\webapp\\\\resources\\\\upload\\\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("C:\\\\Users\\\\okmij\\\\git\\\\test\\\\projectUC\\\\src\\\\main\\\\webapp\\\\resources\\\\upload\\\\" + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			
 			/* 원본 파일 삭제 */
-			String originFileName = file.getAbsolutePath().replace("s_", "");
+			String originFileName = file.getAbsolutePath().replaceAll("s_", "");
 			
 			logger.info("originFileName : " + originFileName);
 			

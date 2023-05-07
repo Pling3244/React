@@ -35,7 +35,15 @@
 	    border: none;
 	    display: block;
 	    cursor: pointer;	
-	}	
+	}
+	.ck_warn{						
+/* 입력란 공란 경고 태그 */
+	display: none;
+    padding-top: 10px;
+    text-align: center;
+    color: #e05757;
+    font-weight: 300;    
+}	
 </style>
 
 <c:if test="${member == null }">
@@ -72,21 +80,19 @@
 									<b>회사명</b>
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<select name="cop_name" class="form-control form-control-user cate1">
-											<option selected value="none">--회사명--</option> 											
-										</select>
-									</div>
-									<!--                                    <span class="id_input_re_1">사용 가능한 아이디입니다.</span> -->
-									<!-- 									<span class="id_input_re_2">중복된 아이디입니다.</span> -->
-									<!-- 									<span class="final_id_ck">아이디를 입력해주세요.</span>   -->
+											<option selected value="">--회사명--</option> 											
+										</select>										
+									</div>	
+									<span class="ck_warn cop_name_warn">회사명을 선택해주세요.</span>								
 								</div>
 								<div class="form-group row">
 									<b>브랜드명</b>
 									<div class="col-sm-6 mb-3 mb-sm-0 ">
 										<select name="br_name" class="form-control form-control-user cate2">
-											<option selected value="none">--브랜드명--</option>
-										</select>
-									</div>
-									<!--                                     <span class="final_name_ck">이름을 입력해주세요.</span>   -->
+											<option selected value="">--브랜드명--</option>
+										</select>										
+									</div>			
+									<span class="ck_warn br_name_warn">브랜드를 선택해주세요.</span>						
 								</div>
 								<div class="form-group  row">
 									<b>차량모델명</b>
@@ -95,7 +101,7 @@
 											class="form-control form-control-user"
 											placeholder="--차량모델명--">
 									</div>
-									<!--                                	 <span class="final_phone_ck">휴대폰 번호를 입력해주세요.</span>   -->
+									<span class="ck_warn car_name_warn">모델명을 입력해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>차량연식(년)</b>
@@ -103,16 +109,16 @@
 										<input name="model_year" type="text"
 											class="form-control form-control-user" placeholder="ex: 2022">
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn model_year_warn">연식을 입력해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>주행거리(Km)</b>
-									<div class="col-sm-6 mb-3 mb-sm-0">
+									<div class="col-sm-5 mb-3 mb-sm-0">
 										<input name="mileage" type="text"
 											class="form-control form-control-user"
 											placeholder="ex: 13500">
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn mileage_warn">주행거리를 입력해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>승차정원(인)</b>
@@ -120,7 +126,7 @@
 										<input name="number_p" type="text"
 											class="form-control form-control-user" placeholder="ex: 5">
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn number_p_warn">승차정원을 입력해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>연료타입</b>
@@ -136,7 +142,7 @@
 											<option value="기타">기타</option>
 										</select>
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn fuel_type_warn">연료타입을 선택해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>차량색상</b>
@@ -157,7 +163,7 @@
 											<option value="기타">기타</option>
 										</select>
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn color_warn">차량색상을 선택해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>매매지역</b>
@@ -184,15 +190,14 @@
 											<option value="기타">기타</option>
 										</select>
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn region_warn">매매지역을 선택해주세요.</span>
 								</div>
 								<div class="form-group  row">
-									<b>실차주 여부</b>
-									<div class="col-sm-10">
-										<input name="owner" type="radio" value="실차주" /> 실차주 <input
-											name="owner" type="radio" value="실차주 아님" /> 실차주아님
+									<div class="col-sm-5">
+										<input name="owner" type="radio" value="실차주" /> 실차주 
+										<input name="owner" type="radio" value="실차주 아님" /> 실차주아님
 									</div>
-									<!-- 									<span class="final_gender_ck">성별을 체크해주세요.</span>   -->
+									<span class="ck_warn owner_warn">실차주 여부를 선택해주세요.</span>
 								</div>
 								<div class="form-group  row">
 									<b>판매가격(만원)</b>
@@ -200,7 +205,7 @@
 										<input name="price" type="text"
 											class="form-control form-control-user" placeholder="ex: 2500">
 									</div>
-									<!--                                   <span class="final_region_ck">사는 지역을 입력해주세요.</span>   -->
+									<span class="ck_warn price_warn">판매가격을 입력해주세요.</span>
 								</div>
 								<div class="form-group row">
 									<b>차량사진첨부</b> <input type="file" multiple="multiple"
@@ -211,7 +216,7 @@
 									<b>알림사항</b>
 									<div class="col-sm-8">
 										<textarea name="uc_text" cols="50" rows="5"
-											class="form-control" placeholder="구매 문의는 쪽지를 보내주세요"></textarea>
+											class="form-control"><c:out value="구매 문의는 쪽지를 보내주세요."/></textarea>
 									</div>
 								</div>
 
@@ -354,9 +359,126 @@
 		/* 상품 등록 버튼 */
 		$(".regist_button").on("click", function() {
 
+			/* 체크 변수 */
+			let cop_nameCk = false;
+			let br_nameCk = false;
+			let car_nameCk = false;
+			let model_yearCk = false;
+			let mileageCk = false;			
+			let number_pCk = false;
+			let fuel_typeCk = false;
+			let colorCk = false;
+			let regionCk = false;
+			let ownerCk = false;
+			let priceCk = false;
+			
+			/* 체크 대상 변수 */
+			let cop_name = $("select[name='cop_name']").val();
+			let br_name = $("select[name='br_name']").val();
+			let car_name = $("input[name='car_name']").val();
+			let model_year = $("input[name='model_year']").val();
+			let mileage = $("input[name='mileage']").val();
+			let number_p = $("input[name='number_p']").val();
+			let fuel_type = $("select[name='fuel_type']").val();
+			let color = $("select[name='color']").val();
+			let region = $("select[name='region']").val();
+			let owner = $("input[name='owner']:radio:checked").length;
+			let price = $("input[name='price']").val();
+			
+			if(cop_name != ''){
+				$(".cop_name_warn").css('display','none');
+				cop_nameCk = true;
+			} else {
+				$(".cop_name_warn").css('display','block');
+				cop_nameCk = false;
+			}
+			
+			if(br_name != ''){
+				$(".br_name_warn").css('display','none');
+				br_nameCk = true;
+			} else {
+				$(".br_name_warn").css('display','block');
+				br_nameCk = false;
+			}
+			
+			if(car_name){
+				$(".car_name_warn").css('display','none');
+				car_nameCk = true;
+			} else {
+				$(".car_name_warn").css('display','block');
+				car_nameCk = false;
+			}	
+			
+			if(model_year){
+				$(".model_year_warn").css('display','none');
+				model_yearCk = true;
+			} else {
+				$(".model_year_warn").css('display','block');
+				model_yearCk = false;
+			}
+			
+			if(mileage){
+				$(".mileage_warn").css('display','none');
+				mileageCk = true;
+			} else {
+				$(".mileage_warn").css('display','block');
+				mileageCk = false;
+			}	
+			
+			if(number_p){
+				$(".number_p_warn").css('display','none');
+				number_pCk = true;
+			} else {
+				$(".number_p_warn").css('display','block');
+				number_pCk = false;
+			}	
+			
+			if(fuel_type != ''){
+				$(".fuel_type_warn").css('display','none');
+				fuel_typeCk = true;
+			} else {
+				$(".fuel_type_warn").css('display','block');
+				fuel_typeCk = false;
+			}		
+			
+			if(color != ''){
+				$(".color_warn").css('display','none');
+				colorCk = true;
+			} else {
+				$(".color_warn").css('display','block');
+				colorCk = false;
+			}	
+			
+			if(region != ''){
+				$(".region_warn").css('display','none');
+				regionCk = true;
+			} else {
+				$(".region_warn").css('display','block');
+				regionCk = false;
+			}
+			
+			if(owner > 0){
+				$(".owner_warn").css('display','none');
+				ownerCK = true;
+			} else {
+				$(".owner_warn").css('display','block');
+				ownerCK = false;
+			}	
+			
+			if(price){
+				$(".price_warn").css('display','none');
+				priceCk = true;
+			} else {
+				$(".price_warn").css('display','block');
+				pricesCk = false;
+			}				
+			
+			if(cop_nameCk && br_nameCk && car_nameCk && model_yearCk && mileageCk && number_pCk && fuel_typeCk && colorCk && regionCk && ownerCK && priceCk ){
+				//alert('통과');
 			$("#regist_form").attr("action", "/carlist/carRegist");
 			$("#regist_form").submit();
-
+			}
+			return false;
 		});
 		
 		/* 카테고리 */
@@ -401,7 +523,7 @@
 			
 			cateSelect2.children().remove();
 			
-			cateSelect2.append("<option value='none'>--브랜드명--</option>");
+			cateSelect2.append("<option value=''>--브랜드명--</option>");
 			
 			for(let i = 0; i < cate2Array.length; i++){
 				if(selectVal1 === cate2Array[i].cateParent){

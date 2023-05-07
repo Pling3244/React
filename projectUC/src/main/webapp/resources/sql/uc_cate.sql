@@ -47,3 +47,7 @@ insert into uc_cate(tier, cateName, cateCode) values (1, '기타', '2000000');
     insert into uc_cate(tier, cateName, cateCode, cateParent) values (2, '트럭', '2004000','2000000');               
     insert into uc_cate(tier, cateName, cateCode, cateParent) values (2, '트레일러', '2005000','2000000');
     insert into uc_cate(tier, cateName, cateCode, cateParent) values (2, '기타', '2099000','2000000');
+    
+
+alter table uc_car add foreign key (cop_name) references uc_cate(cateCode);
+alter table uc_car add foreign key (br_name) references uc_cate(cateCode);

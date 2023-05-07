@@ -66,6 +66,39 @@ public class CarServiceImpl implements CarService {
 		return goodsInfo;
 }
 	
+	/* 상품 정보 수정 */
+	@Transactional
+	@Override
+	public int goodsModify(CarVO car) {
+		
+		int result = mapper.goodsModify(car);
+		
+		if(result == 1 && car.getImageList() != null && car.getImageList().size() > 0) {
+			
+			mapper.deleteImageAll(car.getNum());
+			
+			car.getImageList().forEach(attach -> {
+				
+				attach.setNum(car.getNum());
+				mapper.imageEnroll(attach);
+				
+			});			
+		}
+		
+		return result;
+	}
+	
+	/* 상품 정보 삭제 */
+	@Transactional
+	public int goodsDelete(int num) {
+
+		log.info("goodsDelete..........");
+		
+		mapper.deleteImageAll(num);
+		
+		return mapper.goodsDelete(num);
+	}	
+	
 	/* 카테고리 리스트 */
 	@Override
 	public List<CateVO> cateList() {

@@ -34,7 +34,7 @@ public class CarServiceTest {
 		car.setBr_name("그랜져");
 		car.setCar_name("GV80");
 		car.setPrice("1000");
-		car.setMileage(12000);
+		car.setMileage("12000");
 		car.setModel_year(2020);
 		car.setFuel_type("가솔린");
 		car.setColor("검정");
@@ -80,7 +80,7 @@ public class CarServiceTest {
 		car.setBr_name("그랜져");
 		car.setCar_name("GV80");
 		car.setPrice("1000");
-		car.setMileage(12000);
+		car.setMileage("12000");
 		car.setModel_year(2020);
 		car.setFuel_type("가솔린");
 		car.setColor("검정");
