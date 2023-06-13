@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +26,17 @@ public class MemberController {
 //
 //    }
     
-    @GetMapping("/insertMember")
-    public String insertMember(@RequestParam Member member) throws Exception {
+//    @PostMapping("/insertMember")
+//    public String insertMember(@RequestParam Member member) throws Exception {
+//           return memberService.insertMember(member);
+//    }
+    
+    @PostMapping("/insertMember")
+    public String insertMember(@RequestParam String id, String pw, String nickname) throws Exception {
+    	Member member = new Member();
+    	member.setId(id);
+    	member.setPw(pw);
+    	member.setNickname(nickname);
            return memberService.insertMember(member);
     }
 
@@ -34,8 +45,12 @@ public class MemberController {
            return memberService.getMemberDetail(id);
     }
 
-    @GetMapping("/updateMember")
-    public String updateMember(@RequestParam Member member) throws Exception {
+    @PostMapping("/updateMember")
+    public String updateMember(@RequestParam String id, String pw, String nickname) throws Exception {
+    	Member member = new Member();
+    	member.setId(id);
+    	member.setPw(pw);
+    	member.setNickname(nickname);
            return memberService.updateMember(member);
     }
 
